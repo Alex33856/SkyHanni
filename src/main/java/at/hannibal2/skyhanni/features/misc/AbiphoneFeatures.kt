@@ -15,7 +15,6 @@ import at.hannibal2.skyhanni.utils.HypixelCommands
 import at.hannibal2.skyhanni.utils.InventoryUtils
 import at.hannibal2.skyhanni.utils.RegexUtils.matches
 import at.hannibal2.skyhanni.utils.StringUtils.isValidUuid
-import at.hannibal2.skyhanni.utils.StringUtils.removeAllNonLettersAndNumbers
 import at.hannibal2.skyhanni.utils.compat.value
 import at.hannibal2.skyhanni.utils.repopatterns.RepoPattern
 import org.lwjgl.glfw.GLFW
@@ -64,7 +63,7 @@ object AbiphoneFeatures {
     fun onNeuRepoReload(event: NeuRepositoryReloadEvent) {
         val constant = event.getConstant<Map<String, AbiphoneContactInfo>>("abiphone")
         abiphoneContacts = constant.flatMap { (key, value) ->
-            value.callNames ?: listOf(key.removeAllNonLettersAndNumbers().replace(" ", ""))
+            value.callNames ?: listOf(key.lowercase())
         }.toSet()
     }
 
